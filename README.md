@@ -2,7 +2,7 @@
 Sudoku resolver and game generator in python
 
 Contributors:
-# lfloresayaviri
-# PamelaQuintana
-# josuemendoza-jalasoft
-# daniel-jauregui
+* lfloresayaviri
+* PamelaQuintana
+* josuemendoza-jalasoft
+* daniel-jauregui
