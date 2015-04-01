@@ -9,13 +9,6 @@ class Menu(object):
 
     def add_item(self, item):
         self.items.append(item)
-        if item.parent != self:
-            item.parent = self
-
-    def remove_item(self, item):
-        self.items.remove(item)
-        if item.parent == self:
-            item.parent = None
 
     def draw(self):
         os.system("cls")
@@ -27,13 +20,23 @@ class Menu(object):
         for item in self.items:
             item.draw()
 
+    def clickItem(self,op):
+        for item in self.items:
+            if (item.id == op):
+                try:
+                    item.function()
+                except:
+                    item.parent()
+
+    def destroy(self):
+        del self
+
 class Item(Menu):
-    def __init__(self, name, function, parent=None):
+    def __init__(self,id , name, function, parent):
+        self.id = id
         self.name = name
         self.function = function
         self.parent = parent
-        if parent:
-            parent.add_item(self)
 
     def draw(self):
-        print("    " + self.name)
+        print("    " + str(self.id) + ". " + self.name)
