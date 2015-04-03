@@ -39,7 +39,7 @@ class Configuration(object):
 
 		return doc.toprettyxml()
 
-# test = File("D:\\test.xml")
-# config = Configuration(test.read_content())
-# print config.get_xml()
-# print config.level
+#test = File("../../doc/xmlTest.xml")
+#config = Configuration(test.read_content())
+#print config.get_xml_as_string()
+#print config.level

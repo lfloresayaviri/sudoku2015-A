@@ -1,0 +1,6 @@
+<sudokuConfig>
+<level>Easy</level>
+<algorithm>Leinad</algorithm>
+<filepath_save>e:\En algun lugr del driver\</filepath_save>
+<filename_save>xmlTest.xml</filename_save>
+</sudokuConfig>

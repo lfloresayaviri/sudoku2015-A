@@ -24,6 +24,9 @@ class Menu(object):
         for item in self.items:
             if (item.id == op):
                 try:
+                   # if (item.parameter):
+                     #   item.function(item.parameter)
+                    #else:
                     item.function()
                 except:
                     item.parent()
@@ -32,11 +35,12 @@ class Menu(object):
         del self
 
 class Item(Menu):
-    def __init__(self,id , name, function, parent):
+    def __init__(self,id , name, function, parent,parameter=None):
         self.id = id
         self.name = name
         self.function = function
         self.parent = parent
+        self.parameter = parameter
 
     def draw(self):
         print("    " + str(self.id) + ". " + self.name)
