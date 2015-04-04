@@ -1,6 +1,9 @@
 # menu.py
+# author: Daniel Jauergui
+# date: 3-31-2015
 
 import os
+
 
 class Menu(object):
     def __init__(self, name, items=None):
@@ -14,19 +17,16 @@ class Menu(object):
         os.system("cls")
         print(self.name)
         line = " "
-        for x in range(0,len(self.name)):
+        for x in range(0, len(self.name)):
             line += "="
         print(line + "\n")
         for item in self.items:
             item.draw()
 
-    def clickItem(self,op):
+    def click_item(self, op):
         for item in self.items:
             if (item.id == op):
                 try:
-                   # if (item.parameter):
-                     #   item.function(item.parameter)
-                    #else:
                     item.function()
                 except:
                     item.parent()
@@ -34,8 +34,9 @@ class Menu(object):
     def destroy(self):
         del self
 
+
 class Item(Menu):
-    def __init__(self,id , name, function, parent,parameter=None):
+    def __init__(self, id, name, function, parent, parameter=None):
         self.id = id
         self.name = name
         self.function = function
