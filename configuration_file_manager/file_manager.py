@@ -11,14 +11,29 @@ class File(object):
 
 	def read_content(self):
 		fo = open(self.file_path, 'r')
-		file_content = fo.read()
-		fo.close()
+
+		try:
+			file_content = fo.read()
+		except IOError as e:
+			raise IOError('cannot read file')
+		finally:
+			fo.close()
+
 		return file_content
 
 	def write_content(self, file_content):
 		fo = open(self.file_path, "wb")
-		fo.write(file_content);
-		fo.close()
+		result = True
+
+		try:
+			fo.write(file_content);
+		except IOError as e:
+			raise IOError('cannot write content to file')
+			result = False
+		finally:
+			fo.close()
+
+		return result
 
 	def delete(self):
 		os.remove(self.file_path)
