@@ -6,8 +6,8 @@ from xml.dom.minidom import *
 import unittest
 import os
 
-from configuration import Configuration
-from file_manager import File
+from configuration_file_manager.configuration import Configuration
+from configuration_file_manager.file_manager import File
 
 class FileManagerTest(unittest.TestCase):
 	TEST_FOLDER = os.getcwd() + '\\test_folder'

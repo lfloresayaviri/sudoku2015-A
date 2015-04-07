@@ -3,8 +3,7 @@
 # date: 4-2-2015
 
 from xml.dom.minidom import *
-from file_manager import File
-from singleton import Singleton
+from configuration_file_manager.singleton import Singleton
 
 class Configuration(object):
 
