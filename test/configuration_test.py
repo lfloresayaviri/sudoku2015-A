@@ -9,7 +9,7 @@ import os
 from configuration import Configuration
 from file_manager import File
 
-class FileManagerTest(unittest.TestCase):
+class ConfigurationTest(unittest.TestCase):
 	TEST_FOLDER = os.getcwd() + '\\test_folder'
 	TEST_FILE = TEST_FOLDER + '\\test_file.txt'
 
@@ -51,13 +51,13 @@ class FileManagerTest(unittest.TestCase):
 
 		raw_xml_sample = ''
 
-		for i in self.XML_SAMPLE:
-			raw_xml_sample += i.strip("\n").strip("\t").replace("\n","").replace("\t","")
+		for character in self.XML_SAMPLE:
+			raw_xml_sample += character.strip("\n").strip("\t").replace("\n","").replace("\t","")
 
 		raw_retrieved_xml = ''
 
-		for i in configuration_instance.get_xml_as_string():
-			raw_retrieved_xml += i.strip("\n").strip("\t").replace("\n","").replace("\t","")
+		for character in configuration_instance.get_xml_as_string():
+			raw_retrieved_xml += character.strip("\n").strip("\t").replace("\n","").replace("\t","")
 
 		self.assertEqual(raw_xml_sample, raw_retrieved_xml)
 
