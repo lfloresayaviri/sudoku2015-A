@@ -1,4 +1,6 @@
 # singleton.py
+# author: Josue Mendoza
+# date: 4-5-2015
 
 class Singleton(type):
     def __init__(cls,name,bases,dic):

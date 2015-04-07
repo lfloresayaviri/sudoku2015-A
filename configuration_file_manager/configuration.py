@@ -32,7 +32,7 @@ class Configuration(object):
 			raise IndexError("invalid configuration file, elements not found")
 
 	def get_xml_as_string(self):
-		doc = Document();
+		doc = Document()
 		config = doc.createElement(self.CONFIGURATION_NAME)
 		level = doc.createElement(self.LEVEL_NAME)
 		algorithm = doc.createElement(self.ALGORITHM_NAME)
