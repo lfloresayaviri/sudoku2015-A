@@ -1,14 +1,18 @@
 # make_sudoku.py
-
-#import sys, os, random, getopt, re
+# author: David Bau
+# Copyright (c) 2006 David Bau.  All rights reserved.
+# Modified by Daniel Jauregui for study purposes
+# Note: Name and variables was not modified
 
 import random
+
 
 def main():
 
     puzzles = [makepuzzle(solution([None] * 81))]
     for puzzle in puzzles:
         print printboard(puzzle)
+
 
 def makepuzzle(board):
     puzzle = []; deduced = [None] * 81
@@ -20,13 +24,16 @@ def makepuzzle(board):
             deduce(deduced)
     return boardforentries(puzzle)
 
+
 def boardforentries(entries):
     board = [None] * 81
     for pos, n in entries: board[pos] = n
     return board
 
+
 def solution(board):
         return solveboard(board)[1]
+
 
 def solveboard(original):
     board = list(original)
@@ -34,6 +41,7 @@ def solveboard(original):
     if guesses is None: return ([], board)
     track = [(guesses, 0, board)]
     return solvenext(track)
+
 
 def solvenext(remembered):
     while len(remembered) > 0:
@@ -48,9 +56,11 @@ def solvenext(remembered):
         remembered.append((guesses, 0, workspace))
     return ([], None)
 
+
 def printcode(n):
     if n is None: return '*'
     return str(n + 1)
+
 
 def printboard(board):
     out = '-----------------------\n'
@@ -67,11 +77,6 @@ def printboard(board):
     out += '-----------------------\n'
     return out
 
-
-# def boardmatches(b1, b2):
-#     for i in xrange(81):
-#         if b1[i] != b2[i]: return False
-#     return True
 
 def deduce(board):
     while True:
@@ -104,6 +109,7 @@ def deduce(board):
             if guess is not None: random.shuffle(guess)
             return guess
 
+
 def figurebits(board):
     allowed, needed = [e is None and 511 or 0 for e in board], []
     for axis in xrange(3):
@@ -114,6 +120,7 @@ def figurebits(board):
                 allowed[posfor(x, y, axis)] &= bits
     return allowed, needed
 
+
 def axismissing(board, x, axis):
     bits = 0
     for y in xrange(9):
@@ -121,18 +128,22 @@ def axismissing(board, x, axis):
         if e is not None: bits |= 1 << e
     return 511 ^ bits
 
+
 def posfor(x, y, axis = 0):
     if axis == 0: return x * 9 + y
     elif axis == 1: return y * 9 + x
     else: return ((0,3,6,27,30,33,54,57,60)[x] + (0,1,2,9,10,11,18,19,20)[y])
 
+
 def listbits(bits):
     return [y for y in xrange(9) if 0 != bits & 1 << y]
+
 
 def pickbetter(b, c, t):
     if b is None or len(t) < len(b): return (t, 1)
     if len(t) > len(b): return (b, c)
     if random.randint(0, c) == 0: return (t, c + 1)
     else: return (b, c + 1)
+
 
 main()
