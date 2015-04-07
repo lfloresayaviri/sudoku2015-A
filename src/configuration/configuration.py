@@ -3,7 +3,8 @@
 # date: 4-2-2015
 
 from xml.dom.minidom import *
-from configuration_file_manager.singleton import Singleton
+from file_manager.file_manager import File
+from utils.singleton import Singleton
 
 class Configuration(object):
 
@@ -23,6 +24,11 @@ class Configuration(object):
 		self.filename_save = self.get_value_from_raw_xml(self.FILENAME_SAVE_NAME)
 
 	def get_value_from_raw_xml(self, xml_key):
+		"""Gets a value from a XML string.
+
+		Keyword arguments:
+		xml_key -- the string that contains the xml data
+		"""
 		dom = parseString(self.__raw_xml_configuration)
 		
 		try:
@@ -31,7 +37,10 @@ class Configuration(object):
 			raise IndexError("invalid configuration file, elements not found")
 
 	def get_xml_as_string(self):
-		doc = Document();
+		"""Retrieves all the attributes from a configuration instance, with the	data
+		gathered it builds an XML and stores it into a string which is returned as result
+		"""
+		doc = Document()
 		config = doc.createElement(self.CONFIGURATION_NAME)
 		level = doc.createElement(self.LEVEL_NAME)
 		algorithm = doc.createElement(self.ALGORITHM_NAME)
@@ -50,13 +59,3 @@ class Configuration(object):
 		config.appendChild(filename_save)
 
 		return doc.toprettyxml()
-
-
-# test = File("D:\\test.xml")
-# config = Configuration(test.read_content())
-# print config
-
-# conf2 = Configuration(test.read_content())
-# print conf2
-# print config.get_xml_as_string()
-# print config.level

@@ -1,20 +1,24 @@
+# configuration_manager.py
+# author: Josue Mendoza
+# date: 4-7-2015
+
 import unittest
 import sys
 
 sys.path.append("../src")
+sys.path.append("../src/file_manager")
+sys.path.append("../src/configuration")
+sys.path.append("../src/utils")
 
-from point_test import PointTest
-from line_test import LineTest
-from line_segment_test import LineSegmentTest
+from file_manager_test import FileManagerTest
+from configuration_test import ConfigurationTest
 
 # Load Tests
-point_suite = unittest.TestLoader().loadTestsFromTestCase(PointTest)
-line_suite = unittest.TestLoader().loadTestsFromTestCase(LineTest)
-line_segment_suite = unittest.TestLoader().loadTestsFromTestCase(LineSegmentTest)
+file_manager_suite = unittest.TestLoader().loadTestsFromTestCase(FileManagerTest)
+configuration_suite = unittest.TestLoader().loadTestsFromTestCase(ConfigurationTest)
 
 # Load Test Suite
-alltests = unittest.TestSuite([point_suite, line_suite, line_segment_suite])
+alltests = unittest.TestSuite([file_manager_suite, configuration_suite])
 
 # Execute Test Suite
-unittest.TextTestRunner(verbosity=1).run(alltests)
-
+unittest.TextTestRunner(verbosity=2).run(alltests)

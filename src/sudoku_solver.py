@@ -2,8 +2,8 @@
 # author: Daniel Jauergui
 # date: 3-31-2015
 
-from configuration_file_manager.configuration import *
-from configuration_file_manager.file_manager import *
+from configuration.configuration import *
+from file_manager.file_manager import *
 from decorator_menu import request_answer_menu
 from menu import Menu
 from menu import Item
@@ -39,7 +39,7 @@ def config_menu(option=999):
 def print_config_file():
     os.system('cls')
     print ('Print Configuration file\n\n')
-    file_obj = File('configuration_file_manager/xml_config.xml')
+    file_obj = File('configuration/xml_config.xml')
     config = Configuration(file_obj.read_content())
     print (config.get_xml_as_string())
     input('\n\nPress any key: ')
@@ -48,7 +48,7 @@ def print_config_file():
 def print_level_file():
     os.system('cls')
     print ('Print Level of Configuration file\n\n')
-    file_obj = File('configuration_file_manager/xml_config.xml')
+    file_obj = File('configuration/xml_config.xml')
     config = Configuration(file_obj.read_content())
     print (config.level)
     input('\n\nPress any key: ')

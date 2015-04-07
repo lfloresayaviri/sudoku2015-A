@@ -5,7 +5,7 @@
 import unittest
 import os
 
-from configuration_file_manager.file_manager import File
+from file_manager import File
 
 class FileManagerTest(unittest.TestCase):
 	TEST_FOLDER = os.getcwd() + '\\test_folder'
