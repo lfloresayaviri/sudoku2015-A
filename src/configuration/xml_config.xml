@@ -2,6 +2,6 @@
 <configuration>
     <level>easy</level>
     <algorithm>norvigs</algorithm>
-    <filepath_save>D:\</filepath_save>
-    <filename_save>sudoku.txt</filename_save>
+    <file_path_save>D:\</file_path_save>
+    <file_name_save>sudoku.txt</file_name_save>
 </configuration>

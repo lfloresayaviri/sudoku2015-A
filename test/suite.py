@@ -18,7 +18,7 @@ file_manager_suite = unittest.TestLoader().loadTestsFromTestCase(FileManagerTest
 configuration_suite = unittest.TestLoader().loadTestsFromTestCase(ConfigurationTest)
 
 # Load Test Suite
-alltests = unittest.TestSuite([file_manager_suite, configuration_suite])
+all_tests = unittest.TestSuite([file_manager_suite, configuration_suite])
 
 # Execute Test Suite
-unittest.TextTestRunner(verbosity=2).run(alltests)
+unittest.TextTestRunner(verbosity=2).run(all_tests)
