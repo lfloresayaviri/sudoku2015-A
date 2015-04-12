@@ -7,6 +7,7 @@ from file_manager.file_manager import *
 from decorator_menu import request_answer_menu
 from menu import Menu
 from menu import Item
+from game import *
 
 
 @request_answer_menu
@@ -53,10 +54,11 @@ def print_level_file():
     print (config.level)
     input('\n\nPress any key: ')
 
+
 @request_answer_menu
 def game_menu(option=999):
     menu = Menu('Sudoku Solver - Game Section')
-    menu.add_item(Item(1, 'Start New Game', None, game_menu))
+    menu.add_item(Item(1, 'Start New Game', game, game_menu))
     menu.add_item(Item(2, 'Import Game', None, game_menu))
     menu.add_item(Item(9, 'Back', main_menu, game_menu))
     menu.add_item(Item(0, 'Exit', None, game_menu))
@@ -64,5 +66,22 @@ def game_menu(option=999):
     if option != 999:
         menu.click_item(option)
         menu.destroy()
+
+
+def game():
+    os.system('cls')
+    print ('\n      Sudoku Game')
+    print ('      """""" """"\n\n')
+    sudoku_game = Game("easy")
+    board = sudoku_game.generate_game()
+    # print(temp)
+    print sudoku_game.print_board(board)
+    c = 0
+    for x in board:
+        if x:
+            c += 1
+    c = 81 - c
+    print("Missing numbers: %i" % c)
+    input('\n\nPress any key: ')
 
 main_menu()
