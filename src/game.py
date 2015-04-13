@@ -17,7 +17,6 @@ class Game(object):
         with level defined and it will return a array e.g.: Array: [4, 9, 3, None, 5, ...., 8, 8, None, None, 1]
         Where the position are from 0 to 80
 
-        Keyword arguments:
         return -- Array e.g.: [4, 9, 3, None, 5, ...., 8, 8, None, None, 1]
         """
         return self.make_puzzle(self.solution([None] * 81))
@@ -33,6 +32,7 @@ class Game(object):
         """
         """ Implement random according level defined """
         puzzle = []
+        # Deduced will use basic board for iteration conditional and fill it for each value found
         deduced = [None] * 81
         order = random.sample(xrange(81), 81)
         for position in order:
@@ -90,40 +90,18 @@ class Game(object):
         return  -- Array e.g.: [4, 9, 3, 4, 5, ...., 8, 7, 4, 8, 1]
         """
         while len(remembered) > 0:
-            guesses, c, board = remembered.pop()
-            if c >= len(guesses):
+            guesses, count, board = remembered.pop()
+            if count >= len(guesses):
                 continue
-            remembered.append((guesses, c + 1, board))
+            remembered.append((guesses, count + 1, board))
             workspace = list(board)
-            pos, n = guesses[c]
+            pos, n = guesses[count]
             workspace[pos] = n
             guesses = self.deduce(workspace)
             if guesses is None:
                 return (remembered, workspace)
             remembered.append((guesses, 0, workspace))
         return [], None
-
-    def print_code(self, n):
-        """ It will be removed and defined in new class related with UI"""
-        if n is None:
-            return '*'
-        return str(n + 1)
-
-    def print_board(self, board):
-        """ It will be removed and defined in new class related with UI"""
-        out = '-----------------------\n'
-        y = 8
-        for matrix in xrange(81):
-            out += self.print_code(board[matrix]) + ' '
-            if (matrix % 3) == 2:
-                    out += "| "
-            if matrix == y:
-                    out += '\n'
-                    if ((matrix >= 19) and (matrix <= 27)) or ((matrix >= 45) and (matrix <= 54)):
-                            out += '------+-------+--------\n'
-                    y += 9
-        out += '-----------------------\n'
-        return out
 
     def deduce(self, board):
         """Get a board that require to deduce the value following the
@@ -136,7 +114,7 @@ class Game(object):
         while True:
             stuck, guess, count = True, None, 0
             # fill in any spots determined by direct conflicts
-            allowed, needed = self.figure_bits(board)
+            allowed, needed = self.calculate_bits(board)
             for position in xrange(81):
                 if None == board[position]:
                     numbers = self.list_bits(allowed[position])
@@ -148,7 +126,7 @@ class Game(object):
                     elif stuck:
                         guess, count = self.pick_better(guess, count, [(position, number) for number in numbers])
             if not stuck:
-                allowed, needed = self.figure_bits(board)
+                allowed, needed = self.calculate_bits(board)
             # fill in any spots determined by elimination of other locations
             for axis in xrange(3):
                 for x in xrange(9):
@@ -172,7 +150,7 @@ class Game(object):
                     random.shuffle(guess)
                 return guess
 
-    def figure_bits(self, board):
+    def calculate_bits(self, board):
         """Get a board that require verify if a position is allowed according with
          sudoku rules
 
@@ -190,7 +168,7 @@ class Game(object):
         return allowed, needed
 
     def axis_missing(self, board, x, axis):
-        """Verify the missing azis using the board
+        """Verify the missing axis using the board
 
         Keyword arguments:
         board -- Array e.g.: [[None, 8,..., 1, None]]
@@ -200,9 +178,9 @@ class Game(object):
         """
         bits = 0
         for y in xrange(9):
-            e = board[self.position_for(x, y, axis)]
-            if e is not None:
-                bits |= 1 << e
+            current_value = board[self.position_for(x, y, axis)]
+            if current_value is not None:
+                bits |= 1 << current_value
         return 511 ^ bits
 
     def position_for(self, x, y, axis=0):

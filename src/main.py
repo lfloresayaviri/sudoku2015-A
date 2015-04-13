@@ -69,19 +69,42 @@ def game_menu(option=999):
 
 
 def game():
+    """
+         def print_code(self, number):
+        #It will be removed and defined in new class related with UI
+        if number is None:
+            return '*'
+        return str(number + 1)
+
+    def print_board(self, board):
+        #It will be removed and defined in new class related with UI#
+        out = '-----------------------\n'
+        y = 8
+        for matrix in xrange(81):
+            out += self.print_code(board[matrix]) + ' '
+            if (matrix % 3) == 2:
+                    out += "| "
+            if matrix == y:
+                    out += '\n'
+                    if ((matrix >= 19) and (matrix <= 27)) or ((matrix >= 45) and (matrix <= 54)):
+                            out += '------+-------+--------\n'
+                    y += 9
+        out += '-----------------------\n'
+        return out
+    """
     os.system('cls')
     print ('\n      Sudoku Game')
     print ('      """""" """"\n\n')
     sudoku_game = Game("easy")
-    board = sudoku_game.generate_game()
+    #board = sudoku_game.generate_game()
     # print(temp)
-    print sudoku_game.print_board(board)
-    c = 0
-    for x in board:
-        if x:
-            c += 1
-    c = 81 - c
-    print("Missing numbers: %i" % c)
+    #print sudoku_game.print_board(board)
+    #c = 0
+    #for x in board:
+    #    if x:
+    #        c += 1
+    #c = 81 - c
+    #print("Missing numbers: %i" % c)
     input('\n\nPress any key: ')
 
 main_menu()
