@@ -2,7 +2,6 @@
 # author: Josue Mendoza
 # date: 4-5-2015
 
-from xml.dom.minidom import *
 import unittest
 import os
 
