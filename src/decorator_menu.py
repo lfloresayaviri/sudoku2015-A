@@ -4,12 +4,12 @@
 
 
 def request_answer_menu(function):
-    def request_answer():
+    def request_answer(*args):
         op = 999
         while op != 0:
-            function(op)
-            if op != 999:
-                op = 0
+            rest = function(op)
+            #if op != 999:
+            #    op = 0
             try:
                 if op == 0:
                     break

@@ -3,17 +3,33 @@
 # date: 3-31-2015
 
 import os
-
+from utils.singleton import Singleton
 
 class Menu(object):
+
+    __metaclass__ = Singleton
+
     def __init__(self, name, items=None):
         self.name = name
-        self.items = items or []
+        self.items = []
 
     def add_item(self, item):
+        """Get a tuple of id,name and function, in order to get action for each
+        item added to current Menu
+
+        Keyword arguments:
+        item -- A Tuple of int, string object eg: (1,'Item of Menu', function).
+        """
         self.items.append(item)
 
+    def clear_items(self):
+        """Remove all items of current menu.
+        """
+        self.items = []
+
     def draw(self):
+        """Print Current menu and its items.
+        """
         os.system("cls")
         print(self.name)
         line = " "
@@ -21,27 +37,36 @@ class Menu(object):
             line += "="
         print(line + "\n")
         for item in self.items:
-            item.draw()
+            print("    " + str(item[0]) + ". " + item[1])
 
-    def click_item(self, op):
+    def ask(self):
+        """Aks an option and validate if input is a number,
+        if it is less than 0 or major the options in current menu
+        the same menu will be displayed until user set correct value.
+        """
+        option = 999
+        while option != 0:
+            self.draw()
+            try:
+                option = input("\n\nPlease select an option: ")
+                val = int(option)
+            except:
+                option = 999
+            if 1 <= option <= len(self.items)-1:
+                break
+        if option != 0:
+            self.click_item(option)
+
+    def click_item(self, option):
+        """Move to the next menu or action.
+
+        Keyword arguments:
+        option -- A Tuple of int, string object where execute the object
+        assigned to the item.
+        """
         for item in self.items:
-            if (item.id == op):
-                try:
-                    item.function()
-                except:
-                    item.parent()
+            if item[0] == option:
+                item[2]()
 
     def destroy(self):
         del self
-
-
-class Item(Menu):
-    def __init__(self, id, name, function, parent, parameter=None):
-        self.id = id
-        self.name = name
-        self.function = function
-        self.parent = parent
-        self.parameter = parameter
-
-    def draw(self):
-        print("    " + str(self.id) + ". " + self.name)
